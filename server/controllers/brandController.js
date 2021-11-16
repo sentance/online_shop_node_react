@@ -1,4 +1,5 @@
 const {Brand} = require('../models/models')
+const checkRole = require('../midleware/roleCheckMiddleware')
 
 class BrandController {
     async create(req, res) {
