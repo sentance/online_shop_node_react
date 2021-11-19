@@ -10,7 +10,8 @@ import {
 import Basket from "./page/Basket";
 import Shop from "./page/Shop";
 import Auth from "./page/Auth";
-import DevicePage from "./page/DevicePage";
+import DeviceItem from "./page/DeviceItem";
+import DevicePage from "./components/DevicePage";
 
 export const authRoutes = [
     {
