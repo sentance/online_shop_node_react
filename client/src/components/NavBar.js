@@ -8,6 +8,11 @@ import {observer} from "mobx-react-lite";
 const NavBar = observer(() => {
     const {user} = useContext(Context)
     const navigate = useNavigate()
+    const logout = () => {
+        user.setUser({})
+        user.setIsAuth(false)
+        navigate(SHOP_ROUTE)
+    }
     return (
 
             <Navbar bg="secondary" expand="lg">
@@ -17,7 +22,7 @@ const NavBar = observer(() => {
                     {user.isAuth ?
                         <Nav className="ml-auto">
                             <Button variant="outline-light" onClick={()=>navigate(ADMIN_ROUTE)}>Admin</Button>
-                            <Button style={{marginLeft: 20}} variant="outline-light" onClick={()=>navigate(LOGIN_ROUTE)}> Logout</Button>
+                            <Button style={{marginLeft: 20}} variant="outline-light" onClick={()=>logout()}> Logout</Button>
                         </Nav>
                         :
                         <Nav className="ml-auto">
