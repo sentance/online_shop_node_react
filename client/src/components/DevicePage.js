@@ -2,14 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {Container, Col, Image, Row, Card, Button} from 'react-bootstrap';
 import bigStar from '../assets/bigStar.png';
-import {fetchDevice} from "../http/deviceApi";
+import {fetchOneDevice} from "../http/deviceApi";
 
 const DevicePage = () => {
     const [device, setDevice] = useState({info:[]})
     const {id} = useParams()
 
     useEffect(()=>{
-        fetchDevice(id).then(data=>setDevice(data))
+        fetchOneDevice(id).then(data=>setDevice(data))
     },[])
     return (
         <Container className="mt-3">
@@ -24,7 +24,7 @@ const DevicePage = () => {
                             className="d-flex align-items-center justify-content-center"
                             style={{background: `url(${bigStar}) no-repeat center center`, width:240, height: 240, backgroundSize: "cover", fontSize: 64}}
                         >
-                            {device.ratingrating}
+                            {device.rating}
                         </div>
                     </Row>
 
