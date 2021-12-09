@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Dropdown, Form, Modal} from "react-bootstrap";
-import {createBrand} from "../../http/brandApi";
+import {createBrand} from "../../http/deviceApi";
 
 
 const CreateBrand = ({show, onHide}) => {

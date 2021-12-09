@@ -1,10 +1,8 @@
 import React, {useContext, useEffect, useState} from "react";
 import {Button, Col, Dropdown, Form, Modal, Row} from "react-bootstrap";
 import {Context} from "../../index";
-import {fetchTypes} from "../../http/typeApi";
-import {fetchBrands} from "../../http/brandApi";
+import {fetchTypes, fetchBrands, createDevice} from "../../http/deviceApi";
 import {observer} from "mobx-react-lite";
-import {createDevice} from "../../http/deviceApi";
 
 
 
@@ -59,7 +57,9 @@ const CreateDevice = observer(({show, onHide}) => {
             <Modal.Body>
                 <Form>
                     <Dropdown className="mt-2 mb-2 p-2">
-                        <Dropdown.Toggle>{device.selectedType.name || "Choose type"}</Dropdown.Toggle>
+                        <Dropdown.Toggle>
+                            {device.selectedType.name || "Choose type"}
+                        </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.types.map(type=>
                                 <Dropdown.Item onClick={()=>device.setSelectedType(type)} key={type.id}>{type.name}</Dropdown.Item>
@@ -67,7 +67,9 @@ const CreateDevice = observer(({show, onHide}) => {
                         </Dropdown.Menu>
                     </Dropdown>
                     <Dropdown className="mt-2 mb-2 p-2">
-                        <Dropdown.Toggle>{device.selectedBrand.name || "Select brand"}</Dropdown.Toggle>
+                        <Dropdown.Toggle>
+                            {device.selectedBrand.name || "Select brand"}
+                        </Dropdown.Toggle>
                         <Dropdown.Menu>
                             {device.brands.map(brand=>
                                 <Dropdown.Item onClick={()=>device.setSelectedBrand(brand)} key={brand.id}>{brand.name}</Dropdown.Item>
