@@ -1,10 +1,14 @@
-import React, {useContext} from "react";
+import React, {useState} from "react";
 import {Button, Dropdown, Form, Modal} from "react-bootstrap";
-import {Context} from "../../index";
+import {createBrand} from "../../http/brandApi";
 
 
 const CreateBrand = ({show, onHide}) => {
-    const {device} = useContext(Context)
+    const [value, setValue] = useState('')
+    const addBrand = () => {
+        createBrand({name: value}).then(data=>setValue(''))
+        onHide()
+    }
     return (
         <Modal
             show={show}
@@ -17,21 +21,18 @@ const CreateBrand = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Dropdown>
-                        <Dropdown.Toggle>Select brand</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {device.brands.map(type=>
-                                <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <Form.Control
+                        value={value}
+                        onChange={event => setValue(event.target.value)}
+                        placeholder={"enter new brand name"}
+                    />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>
                     Close
                 </Button>
-                <Button variant="primary">Add</Button>
+                <Button variant="primary" onClick={addBrand}>Add</Button>
             </Modal.Footer>
         </Modal>
     )

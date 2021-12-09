@@ -1,10 +1,15 @@
-import React, {useContext} from "react";
-import {Button, Dropdown, Form, Modal} from "react-bootstrap";
-import {Context} from "../../index";
+import React, {useState} from "react";
+import {Button, Form,  Modal} from "react-bootstrap";
+
+import {createType} from "../../http/typeApi";
 
 
 const CreateType = ({show, onHide}) => {
-    const {device} = useContext(Context)
+    const [value, setValue] = useState('')
+    const addType = () => {
+        createType({name: value}).then(data=>setValue(''))
+        onHide()
+    }
     return (
         <Modal
             show={show}
@@ -17,21 +22,18 @@ const CreateType = ({show, onHide}) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    <Dropdown>
-                        <Dropdown.Toggle>Select type</Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {device.types.map(type=>
-                                <Dropdown.Item key={type.id}>{type.name}</Dropdown.Item>
-                            )}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    <Form.Control
+                        value={value}
+                        placeholder={'Enter new type name'}
+                        onChange={e=>setValue(e.target.value)}
+                    />
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={onHide}>
                     Close
                 </Button>
-                <Button variant="primary">Add</Button>
+                <Button variant="primary" onClick={addType}>Add</Button>
             </Modal.Footer>
         </Modal>
     )

@@ -1,7 +1,7 @@
 import {$authHost, $host} from "./index";
 
-export const createBran = async (type) => {
-    const {data} = await $authHost.post('api/type', type)
+export const createBrand = async (type) => {
+    const {data} = await $authHost.post('api/brand', type)
     return data
 }
 
